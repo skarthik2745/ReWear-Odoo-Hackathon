@@ -28,7 +28,7 @@ Tons of textiles are discarded every day, contributing to environmental damage. 
 - Hosted using GitHub
 
 ## 🙋‍♂ Developed By
-*S. Karthik*  
+*S. Karthik*  , *Bhavani Sankar* 
 Participant – Odoo Virtual Hackathon, July 2025  
 Department of ECE, Rajalakshmi Institute of Technology
 phone number : 7200507050
