@@ -1,0 +1,217 @@
+body {
+  font-family: "Inter", sans-serif;
+  background: #fdf6ec
+    url("https://www.transparenttextures.com/patterns/recycled-paper.png");
+  min-height: 100vh;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 700;
+  color: #333333;
+}
+
+.navbar {
+  background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+  border-bottom: none;
+  box-shadow: 0 4px 16px rgba(46, 204, 113, 0.15);
+}
+
+.navbar-brand {
+  color: #fff !important;
+  font-weight: 700;
+}
+
+.navbar .nav-link {
+  color: rgba(255, 255, 255, 0.9) !important;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.navbar .nav-link.active,
+.navbar .nav-link:focus,
+.navbar .nav-link:hover {
+  color: #fff !important;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
+}
+
+.btn-eco {
+  background: #2ecc71;
+  color: #fff;
+  border-radius: 2rem;
+  font-weight: 600;
+  box-shadow: 0 4px 16px rgba(46, 204, 113, 0.2);
+  transition: all 0.3s ease;
+  border: none;
+  padding: 0.75rem 2rem;
+}
+
+.btn-eco:hover {
+  background: #27ae60;
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(46, 204, 113, 0.3);
+}
+
+.btn-outline-eco {
+  border: 2px solid #2ecc71;
+  color: #2ecc71;
+  background: transparent;
+  border-radius: 2rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  padding: 0.75rem 2rem;
+}
+
+.btn-outline-eco:hover {
+  background: #2ecc71;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.form-control,
+.form-select {
+  border-radius: 1rem;
+  border: 2px solid #e8e8e8;
+  box-shadow: none;
+  transition: all 0.3s ease;
+  background: #fafafa;
+  padding: 0.75rem 1rem;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: #2ecc71;
+  box-shadow: 0 0 0 0.2rem rgba(46, 204, 113, 0.15);
+  background: #fff;
+}
+
+.form-label {
+  color: #333333;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.card,
+.form-card,
+.about-card,
+.item-card {
+  border-radius: 1.5rem;
+  box-shadow: 0 8px 32px rgba(46, 204, 113, 0.08);
+  background: #fff;
+  border: 1px solid rgba(46, 204, 113, 0.1);
+  transition: all 0.3s ease;
+}
+
+.card:hover,
+.form-card:hover,
+.about-card:hover,
+.item-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(46, 204, 113, 0.15);
+}
+
+footer {
+  background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+  color: #fff;
+  border-radius: 1.5rem 1.5rem 0 0;
+  box-shadow: 0 -4px 16px rgba(46, 204, 113, 0.15);
+}
+
+img {
+  border-radius: 1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+img:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+img[onerror] {
+  display: none !important;
+}
+
+.badge {
+  font-size: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 1rem;
+  font-weight: 500;
+}
+
+.eco-icon {
+  color: #2ecc71;
+  margin-right: 0.5rem;
+}
+
+.page-header {
+  background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+  color: #fff;
+  padding: 3rem 0;
+  margin-bottom: 2rem;
+  border-radius: 0 0 2rem 2rem;
+  box-shadow: 0 4px 16px rgba(46, 204, 113, 0.15);
+}
+
+.contact-details {
+  background: #f8f9fa;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  border-left: 4px solid #2ecc71;
+}
+
+.donor-info {
+  border-bottom: 1px solid #e9ecef;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+}
+
+.contact-section {
+  background: #f8f9fa;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.success-alert {
+  background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+  color: #fff;
+  border-radius: 1rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-weight: 600;
+  box-shadow: 0 4px 16px rgba(46, 204, 113, 0.2);
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    border-radius: 0 0 1rem 1rem;
+  }
+
+  .form-card,
+  .about-card,
+  .item-card {
+    padding: 1.5rem 1rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .page-header {
+    padding: 2rem 0;
+  }
+
+  .btn-eco,
+  .btn-outline-eco {
+    padding: 0.6rem 1.5rem;
+    font-size: 0.9rem;
+  }
+}

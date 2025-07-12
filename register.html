@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register – ReWear</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>body{font-family:'Poppins','Nunito',sans-serif;background:#fdf6ec url('https://www.transparenttextures.com/patterns/recycled-paper.png');min-height:100vh;}</style>
+</head>
+<body>
+  <main class="d-flex flex-column align-items-center justify-content-center min-vh-100">
+    <div class="auth-card">
+      <div class="text-center mb-4">
+        <a href="index.html" class="navbar-brand fw-bold fs-3">
+          <i class="fas fa-recycle eco-icon"></i>ReWear
+        </a>
+        <div class="fw-semibold text-muted mt-1 mb-2" style="font-size:1.1rem;">Give clothes. Share kindness.</div>
+      </div>
+      <form id="registerForm" autocomplete="on">
+        <div class="mb-3">
+          <label class="form-label">Full Name</label>
+          <input type="text" class="form-control" id="registerName" placeholder="Your full name" required />
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Phone Number</label>
+          <input type="text" class="form-control" id="registerPhone" placeholder="Phone number (username)" required />
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Location</label>
+          <input type="text" class="form-control" id="registerLocation" placeholder="Current address" required />
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Role</label>
+          <select class="form-select" id="registerRole" required>
+            <option value="">Select role</option>
+            <option value="Donor">Donor</option>
+            <option value="Receiver">Receiver</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Password</label>
+          <input type="password" class="form-control" id="registerPassword" placeholder="Create a password" required />
+        </div>
+        <div id="registerAlert" class="alert d-none" role="alert"></div>
+        <div class="d-grid mt-3">
+          <button type="submit" class="btn btn-eco btn-lg" id="registerBtn">
+            <span id="registerBtnText"><i class="fas fa-user-plus me-2"></i>Register</span>
+            <span id="registerBtnSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+          </button>
+        </div>
+      </form>
+      <div class="text-center mt-3">
+        <span>Already have an account? <a href="login.html">Login</a></span>
+      </div>
+    </div>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
+  <script src="firebase.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html> 

@@ -96,20 +96,37 @@ async function loadItems() {
       .collection("items")
       .where("status", "==", "available")
       .orderBy("createdAt", "desc")
-      .limit(12)
+      .limit(20)
       .get();
 
     allItems = [];
     itemsSnapshot.forEach((doc) => {
+      const itemData = doc.data();
       allItems.push({
         id: doc.id,
-        ...doc.data(),
+        ...itemData,
+        // Ensure images array exists and has at least one image
+        images:
+          itemData.images && itemData.images.length > 0
+            ? itemData.images
+            : [
+                "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+              ],
+        // Ensure badges array exists
+        badges: itemData.badges || ["🟢"],
       });
     });
 
     filteredItems = [...allItems];
     renderItems();
     hideLoadingState();
+
+    // Show no items message if no items found
+    if (allItems.length === 0) {
+      document.getElementById("noItemsMsg").style.display = "block";
+    } else {
+      document.getElementById("noItemsMsg").style.display = "none";
+    }
   } catch (error) {
     console.error("Error loading items:", error);
     hideLoadingState();
@@ -191,7 +208,7 @@ function loadSampleItems() {
 
 // Render items to the page
 function renderItems() {
-  const itemsContainer = document.getElementById("itemsContainer");
+  const itemsContainer = document.getElementById("itemsGrid");
   if (!itemsContainer) return;
 
   itemsContainer.innerHTML = "";
@@ -223,18 +240,42 @@ function createItemCard(item) {
 
   const badgesHtml = item.badges
     ? item.badges
-        .map((badge) => `<span class="badge bg-success">${badge}</span>`)
+        .map((badge) => `<span class="badge bg-success me-1">${badge}</span>`)
         .join("")
     : "";
 
+  // Handle image display with fallback
+  const imageUrl =
+    item.images && item.images.length > 0
+      ? item.images[0]
+      : "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80";
+
   col.innerHTML = `
         <div class="item-card">
-            <img src="${item.images[0]}" alt="${item.title}" class="img-fluid rounded-top">
+            <div class="item-image-container">
+                <img src="${imageUrl}" alt="${item.title}" class="item-img" 
+                     onclick="openImageModal('${imageUrl}')" 
+                     onerror="this.src='https://images.unsplash.com/photo-1434389677669-e08b4cac3105?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'">
+                <div class="image-overlay">
+                    <div class="zoom-icon">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                ${
+                  item.images && item.images.length > 0
+                    ? '<div class="image-quality">HD</div>'
+                    : ""
+                }
+            </div>
             <div class="item-details p-3">
-                <h6 class="fw-bold">${item.title}</h6>
-                <p class="text-muted small">${item.category} • ${item.size} • ${item.condition}</p>
-                <div class="donor-info d-flex align-items-center mb-2">
-                    <img src="${item.donorImage}" alt="Donor" class="rounded-circle me-2" width="25" height="25">
+                <h6 class="fw-bold mb-2">${item.title}</h6>
+                <p class="text-muted small mb-2">${item.category} • ${
+    item.size
+  } • ${item.condition}</p>
+                <div class="donor-info d-flex align-items-center mb-3">
+                    <img src="${
+                      item.donorImage
+                    }" alt="Donor" class="rounded-circle me-2" width="25" height="25">
                     <small class="text-muted">by ${item.donorName}</small>
                     <div class="ms-auto">
                         ${badgesHtml}
@@ -242,7 +283,9 @@ function createItemCard(item) {
                 </div>
                 <div class="d-flex justify-content-between align-items-center">
                     <span class="badge bg-success">Available</span>
-                    <button class="btn btn-success btn-sm" onclick="requestItem('${item.id}')">
+                    <button class="btn btn-eco btn-sm" onclick="requestItem('${
+                      item.id
+                    }')">
                         <i class="fas fa-gift me-1"></i>Request
                     </button>
                 </div>
