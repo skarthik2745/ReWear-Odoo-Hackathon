@@ -1,5 +1,8 @@
 # ReWear - Community Clothing Exchange Platform
 
+Team Name : Tech Stars
+Team Members : Karthik S, Bhavani Sankar M
+
 A web-based platform that connects donors and receivers to reduce textile waste, build community, and make kindness stylish.
 
 ## 🚀 Recent Updates
