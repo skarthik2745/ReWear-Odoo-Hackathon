@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Item - ReWear</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Firebase CDN -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-storage-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-analytics-compat.js"></script>
+    <script src="firebase/firebase-config.js"></script>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand fw-bold" href="index.html">
+          <i class="fas fa-recycle me-2"></i>ReWear
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="browse.html">Browse Items</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="leaderboard.html">Leaderboard</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="dashboard.html">Dashboard</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="add-item.html">Add Item</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" id="logoutBtn">Logout</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container" style="margin-top: 100px">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <!-- Header -->
+          <div class="text-center mb-5">
+            <h2 class="fw-bold">Add Your Item</h2>
+            <p class="text-muted">
+              Share your clothes and help reduce textile waste
+            </p>
+          </div>
+
+          <!-- Add Item Form -->
+          <div class="card shadow">
+            <div class="card-header bg-success text-white">
+              <h5 class="mb-0"><i class="fas fa-plus me-2"></i>Item Details</h5>
+            </div>
+            <div class="card-body p-4">
+              <form id="addItemForm">
+                <!-- Photo Upload -->
+                <div class="mb-4">
+                  <label class="form-label fw-bold">Item Photos</label>
+                  <div
+                    class="upload-area border-2 border-dashed border-success rounded p-4 text-center"
+                    id="uploadArea"
+                  >
+                    <i
+                      class="fas fa-cloud-upload-alt fa-3x text-success mb-3"
+                    ></i>
+                    <h6 class="fw-bold">Upload Photos</h6>
+                    <p class="text-muted">
+                      Drag and drop images here or click to browse
+                    </p>
+                    <input
+                      type="file"
+                      id="photoInput"
+                      multiple
+                      accept="image/*"
+                      class="d-none"
+                    />
+                    <button
+                      type="button"
+                      class="btn btn-outline-success"
+                      onclick="document.getElementById('photoInput').click()"
+                    >
+                      <i class="fas fa-camera me-2"></i>Choose Photos
+                    </button>
+                  </div>
+                  <div id="photoPreview" class="row mt-3"></div>
+                </div>
+
+                <!-- Basic Information -->
+                <div class="row">
+                  <div class="col-md-8">
+                    <div class="mb-3">
+                      <label class="form-label fw-bold">Item Title</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="e.g., Blue Denim Jacket"
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="mb-3">
+                      <label class="form-label fw-bold">Category</label>
+                      <select class="form-select" required>
+                        <option value="">Select Category</option>
+                        <option value="Men">Men</option>
+                        <option value="Women">Women</option>
+                        <option value="Kids">Kids</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="mb-3">
+                      <label class="form-label fw-bold">Size</label>
+                      <select class="form-select" required>
+                        <option value="">Select Size</option>
+                        <option value="XS">XS</option>
+                        <option value="S">S</option>
+                        <option value="M">M</option>
+                        <option value="L">L</option>
+                        <option value="XL">XL</option>
+                        <option value="XXL">XXL</option>
+                        <option value="Custom">Custom Size</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="mb-3">
+                      <label class="form-label fw-bold">Condition</label>
+                      <select class="form-select" required>
+                        <option value="">Select Condition</option>
+                        <option value="Like New">Like New</option>
+                        <option value="Excellent">Excellent</option>
+                        <option value="Good">Good</option>
+                        <option value="Fair">Fair</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Item Type -->
+                <div class="mb-3">
+                  <label class="form-label fw-bold">Item Type</label>
+                  <select class="form-select" required>
+                    <option value="">Select Item Type</option>
+                    <option value="Tops">
+                      Tops (Shirts, T-shirts, Blouses)
+                    </option>
+                    <option value="Bottoms">
+                      Bottoms (Pants, Jeans, Skirts)
+                    </option>
+                    <option value="Dresses">Dresses</option>
+                    <option value="Outerwear">
+                      Outerwear (Jackets, Coats)
+                    </option>
+                    <option value="Shoes">Shoes</option>
+                    <option value="Accessories">
+                      Accessories (Bags, Hats, Scarves)
+                    </option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+
+                <!-- Description -->
+                <div class="mb-3">
+                  <label class="form-label fw-bold">Description</label>
+                  <textarea
+                    class="form-control"
+                    rows="4"
+                    placeholder="Describe the item, its features, and any notable details..."
+                    required
+                  ></textarea>
+                </div>
+
+                <!-- Additional Details -->
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="mb-3">
+                      <label class="form-label fw-bold">Brand (Optional)</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="e.g., Nike, H&M"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="mb-3">
+                      <label class="form-label fw-bold">Color</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="e.g., Blue, Red, Black"
+                        required
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Location -->
+                <div class="mb-3">
+                  <label class="form-label fw-bold">Pickup Location</label>
+                  <select class="form-select" required>
+                    <option value="">Select Preferred Pickup Method</option>
+                    <option value="Meet in Public">Meet in Public Place</option>
+                    <option value="Home Pickup">Home Pickup</option>
+                    <option value="Office Pickup">Office Pickup</option>
+                    <option value="Shipping">Shipping (Receiver pays)</option>
+                  </select>
+                </div>
+
+                <!-- Contact Information -->
+                <div class="mb-4">
+                  <label class="form-label fw-bold">Contact Information</label>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <input
+                        type="email"
+                        class="form-control mb-2"
+                        placeholder="Email address"
+                        required
+                      />
+                    </div>
+                    <div class="col-md-6">
+                      <input
+                        type="tel"
+                        class="form-control mb-2"
+                        placeholder="Phone number (optional)"
+                      />
+                    </div>
+                  </div>
+                  <small class="text-muted"
+                    >This information will be shared with interested
+                    receivers</small
+                  >
+                </div>
+
+                <!-- Terms and Conditions -->
+                <div class="mb-4">
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      id="termsCheck"
+                      required
+                    />
+                    <label class="form-check-label" for="termsCheck">
+                      I agree to the
+                      <a href="#" class="text-success">Terms and Conditions</a>
+                      and confirm that this item is in good condition
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Submit Buttons -->
+                <div class="d-flex justify-content-between">
+                  <button
+                    type="button"
+                    class="btn btn-outline-secondary"
+                    onclick="window.history.back()"
+                  >
+                    <i class="fas fa-arrow-left me-2"></i>Cancel
+                  </button>
+                  <button type="submit" class="btn btn-success btn-lg">
+                    <i class="fas fa-upload me-2"></i>Publish Item
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- Tips Section -->
+          <div class="card shadow-sm mt-4">
+            <div class="card-header bg-light">
+              <h6 class="mb-0">
+                <i class="fas fa-lightbulb me-2 text-warning"></i>Tips for
+                Better Donations
+              </h6>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-6">
+                  <ul class="list-unstyled">
+                    <li class="mb-2">
+                      <i class="fas fa-check text-success me-2"></i>
+                      Take clear, well-lit photos
+                    </li>
+                    <li class="mb-2">
+                      <i class="fas fa-check text-success me-2"></i>
+                      Be honest about the condition
+                    </li>
+                    <li class="mb-2">
+                      <i class="fas fa-check text-success me-2"></i>
+                      Include multiple angles
+                    </li>
+                  </ul>
+                </div>
+                <div class="col-md-6">
+                  <ul class="list-unstyled">
+                    <li class="mb-2">
+                      <i class="fas fa-check text-success me-2"></i>
+                      Respond quickly to requests
+                    </li>
+                    <li class="mb-2">
+                      <i class="fas fa-check text-success me-2"></i>
+                      Clean items before donating
+                    </li>
+                    <li class="mb-2">
+                      <i class="fas fa-check text-success me-2"></i>
+                      Provide accurate sizing
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="modal fade" id="successModal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header bg-success text-white">
+            <h5 class="modal-title">
+              <i class="fas fa-check-circle me-2"></i>Item Published
+              Successfully!
+            </h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body text-center">
+            <i class="fas fa-gift fa-3x text-success mb-3"></i>
+            <h6 class="fw-bold">Thank you for your donation!</h6>
+            <p class="text-muted">
+              Your item is now available for the community to see. You'll be
+              notified when someone requests it.
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <a href="dashboard.html" class="btn btn-success">
+              <i class="fas fa-tachometer-alt me-2"></i>Go to Dashboard
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/add-item.js"></script>
+  </body>
+</html>

@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Browse Items - ReWear</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Firebase CDN -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-storage-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-analytics-compat.js"></script>
+    <script src="firebase/firebase-config.js"></script>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand fw-bold" href="index.html">
+          <i class="fas fa-recycle me-2"></i>ReWear
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link active" href="browse.html">Browse Items</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="leaderboard.html">Leaderboard</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="dashboard.html">Dashboard</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="add-item.html">Add Item</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" id="logoutBtn">Logout</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container-fluid" style="margin-top: 80px">
+      <!-- Header -->
+      <div class="row mb-4">
+        <div class="col-12">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <h2 class="fw-bold">Browse Available Items</h2>
+              <p class="text-muted">
+                Find the perfect clothing items from our community
+              </p>
+            </div>
+            <div>
+              <a href="add-item.html" class="btn btn-success">
+                <i class="fas fa-plus me-2"></i>Add Your Item
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Filters -->
+      <div class="row mb-4">
+        <div class="col-12">
+          <div class="card shadow-sm">
+            <div class="card-body">
+              <div class="row g-3">
+                <div class="col-md-3">
+                  <label class="form-label fw-bold">Category</label>
+                  <select class="form-select" id="categoryFilter">
+                    <option value="">All Categories</option>
+                    <option value="Men">Men</option>
+                    <option value="Women">Women</option>
+                    <option value="Kids">Kids</option>
+                  </select>
+                </div>
+                <div class="col-md-3">
+                  <label class="form-label fw-bold">Size</label>
+                  <select class="form-select" id="sizeFilter">
+                    <option value="">All Sizes</option>
+                    <option value="XS">XS</option>
+                    <option value="S">S</option>
+                    <option value="M">M</option>
+                    <option value="L">L</option>
+                    <option value="XL">XL</option>
+                    <option value="XXL">XXL</option>
+                  </select>
+                </div>
+                <div class="col-md-3">
+                  <label class="form-label fw-bold">Condition</label>
+                  <select class="form-select" id="conditionFilter">
+                    <option value="">All Conditions</option>
+                    <option value="Like New">Like New</option>
+                    <option value="Excellent">Excellent</option>
+                    <option value="Good">Good</option>
+                    <option value="Fair">Fair</option>
+                  </select>
+                </div>
+                <div class="col-md-3">
+                  <label class="form-label fw-bold">Sort By</label>
+                  <select class="form-select" id="sortFilter">
+                    <option value="newest">Newest First</option>
+                    <option value="oldest">Oldest First</option>
+                    <option value="donor-rating">Donor Rating</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-12">
+                  <button
+                    class="btn btn-outline-success me-2"
+                    id="clearFilters"
+                  >
+                    <i class="fas fa-times me-2"></i>Clear Filters
+                  </button>
+                  <button class="btn btn-success" id="applyFilters">
+                    <i class="fas fa-filter me-2"></i>Apply Filters
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Items Grid -->
+      <div class="row" id="itemsContainer">
+        <!-- Item 1 -->
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+          <div class="item-card">
+            <img
+              src="https://images.unsplash.com/photo-1434389677669-e08b4cac3105?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+              alt="Item"
+              class="img-fluid rounded-top"
+            />
+            <div class="item-details p-3">
+              <h6 class="fw-bold">Blue Denim Jacket</h6>
+              <p class="text-muted small">Men • Medium • Excellent</p>
+              <div class="donor-info d-flex align-items-center mb-2">
+                <img
+                  src="https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=50&q=80"
+                  alt="Donor"
+                  class="rounded-circle me-2"
+                  width="25"
+                  height="25"
+                />
+                <small class="text-muted">by Sarah M.</small>
+                <div class="ms-auto">
+                  <span class="badge bg-success">🌿</span>
+                  <span class="badge bg-success">🟢</span>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="badge bg-success">Available</span>
+                <button
+                  class="btn btn-success btn-sm"
+                  onclick="requestItem('item1')"
+                >
+                  <i class="fas fa-gift me-1"></i>Request
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+          <div class="item-card">
+            <img
+              src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+              alt="Item"
+              class="img-fluid rounded-top"
+            />
+            <div class="item-details p-3">
+              <h6 class="fw-bold">Summer Dress</h6>
+              <p class="text-muted small">Women • Small • Good</p>
+              <div class="donor-info d-flex align-items-center mb-2">
+                <img
+                  src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=50&q=80"
+                  alt="Donor"
+                  class="rounded-circle me-2"
+                  width="25"
+                  height="25"
+                />
+                <small class="text-muted">by Priya S.</small>
+                <div class="ms-auto">
+                  <span class="badge bg-success">🌿</span>
+                  <span class="badge bg-success">🟢</span>
+                  <span class="badge bg-success">⭐</span>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="badge bg-success">Available</span>
+                <button
+                  class="btn btn-success btn-sm"
+                  onclick="requestItem('item2')"
+                >
+                  <i class="fas fa-gift me-1"></i>Request
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 3 -->
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+          <div class="item-card">
+            <img
+              src="https://images.unsplash.com/photo-1503341504253-dff4815485f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+              alt="Item"
+              class="img-fluid rounded-top"
+            />
+            <div class="item-details p-3">
+              <h6 class="fw-bold">Kids Sweater</h6>
+              <p class="text-muted small">Kids • Age 8-10 • Like New</p>
+              <div class="donor-info d-flex align-items-center mb-2">
+                <img
+                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=50&q=80"
+                  alt="Donor"
+                  class="rounded-circle me-2"
+                  width="25"
+                  height="25"
+                />
+                <small class="text-muted">by Rahul K.</small>
+                <div class="ms-auto">
+                  <span class="badge bg-success">🟢</span>
+                  <span class="badge bg-success">⭐</span>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="badge bg-success">Available</span>
+                <button
+                  class="btn btn-success btn-sm"
+                  onclick="requestItem('item3')"
+                >
+                  <i class="fas fa-gift me-1"></i>Request
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 4 -->
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+          <div class="item-card">
+            <img
+              src="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+              alt="Item"
+              class="img-fluid rounded-top"
+            />
+            <div class="item-details p-3">
+              <h6 class="fw-bold">Winter Coat</h6>
+              <p class="text-muted small">Women • Large • Good</p>
+              <div class="donor-info d-flex align-items-center mb-2">
+                <img
+                  src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=50&q=80"
+                  alt="Donor"
+                  class="rounded-circle me-2"
+                  width="25"
+                  height="25"
+                />
+                <small class="text-muted">by Divya M.</small>
+                <div class="ms-auto">
+                  <span class="badge bg-success">🌿</span>
+                  <span class="badge bg-success">🏆</span>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="badge bg-success">Available</span>
+                <button
+                  class="btn btn-success btn-sm"
+                  onclick="requestItem('item4')"
+                >
+                  <i class="fas fa-gift me-1"></i>Request
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 5 -->
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+          <div class="item-card">
+            <img
+              src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+              alt="Item"
+              class="img-fluid rounded-top"
+            />
+            <div class="item-details p-3">
+              <h6 class="fw-bold">Casual Shirt</h6>
+              <p class="text-muted small">Men • Large • Excellent</p>
+              <div class="donor-info d-flex align-items-center mb-2">
+                <img
+                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=50&q=80"
+                  alt="Donor"
+                  class="rounded-circle me-2"
+                  width="25"
+                  height="25"
+                />
+                <small class="text-muted">by Alex P.</small>
+                <div class="ms-auto">
+                  <span class="badge bg-success">🟢</span>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="badge bg-success">Available</span>
+                <button
+                  class="btn btn-success btn-sm"
+                  onclick="requestItem('item5')"
+                >
+                  <i class="fas fa-gift me-1"></i>Request
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 6 -->
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+          <div class="item-card">
+            <img
+              src="https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+              alt="Item"
+              class="img-fluid rounded-top"
+            />
+            <div class="item-details p-3">
+              <h6 class="fw-bold">Jeans</h6>
+              <p class="text-muted small">Men • 32x32 • Good</p>
+              <div class="donor-info d-flex align-items-center mb-2">
+                <img
+                  src="https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=50&q=80"
+                  alt="Donor"
+                  class="rounded-circle me-2"
+                  width="25"
+                  height="25"
+                />
+                <small class="text-muted">by Sarah M.</small>
+                <div class="ms-auto">
+                  <span class="badge bg-success">🌿</span>
+                  <span class="badge bg-success">🟢</span>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="badge bg-success">Available</span>
+                <button
+                  class="btn btn-success btn-sm"
+                  onclick="requestItem('item6')"
+                >
+                  <i class="fas fa-gift me-1"></i>Request
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 7 -->
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+          <div class="item-card">
+            <img
+              src="https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+              alt="Item"
+              class="img-fluid rounded-top"
+            />
+            <div class="item-details p-3">
+              <h6 class="fw-bold">Blouse</h6>
+              <p class="text-muted small">Women • Medium • Like New</p>
+              <div class="donor-info d-flex align-items-center mb-2">
+                <img
+                  src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=50&q=80"
+                  alt="Donor"
+                  class="rounded-circle me-2"
+                  width="25"
+                  height="25"
+                />
+                <small class="text-muted">by Priya S.</small>
+                <div class="ms-auto">
+                  <span class="badge bg-success">🌿</span>
+                  <span class="badge bg-success">🟢</span>
+                  <span class="badge bg-success">⭐</span>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="badge bg-success">Available</span>
+                <button
+                  class="btn btn-success btn-sm"
+                  onclick="requestItem('item7')"
+                >
+                  <i class="fas fa-gift me-1"></i>Request
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 8 -->
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+          <div class="item-card">
+            <img
+              src="https://images.unsplash.com/photo-1551028719-00167b16eac5?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+              alt="Item"
+              class="img-fluid rounded-top"
+            />
+            <div class="item-details p-3">
+              <h6 class="fw-bold">Kids Jeans</h6>
+              <p class="text-muted small">Kids • Age 6-8 • Good</p>
+              <div class="donor-info d-flex align-items-center mb-2">
+                <img
+                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=50&q=80"
+                  alt="Donor"
+                  class="rounded-circle me-2"
+                  width="25"
+                  height="25"
+                />
+                <small class="text-muted">by Rahul K.</small>
+                <div class="ms-auto">
+                  <span class="badge bg-success">🟢</span>
+                  <span class="badge bg-success">⭐</span>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="badge bg-success">Available</span>
+                <button
+                  class="btn btn-success btn-sm"
+                  onclick="requestItem('item8')"
+                >
+                  <i class="fas fa-gift me-1"></i>Request
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Load More Button -->
+      <div class="row">
+        <div class="col-12 text-center">
+          <button class="btn btn-outline-success btn-lg" id="loadMoreBtn">
+            <i class="fas fa-plus me-2"></i>Load More Items
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Request Modal -->
+    <div class="modal fade" id="requestModal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header bg-success text-white">
+            <h5 class="modal-title">
+              <i class="fas fa-gift me-2"></i>Request Item
+            </h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="item-preview mb-3">
+              <img
+                src=""
+                alt="Item"
+                class="img-fluid rounded"
+                id="modalItemImage"
+                style="max-height: 200px; width: 100%; object-fit: cover"
+              />
+              <h6 class="fw-bold mt-2" id="modalItemTitle"></h6>
+              <p class="text-muted small" id="modalItemDetails"></p>
+            </div>
+            <form id="requestForm">
+              <div class="mb-3">
+                <label class="form-label fw-bold">Message to Donor</label>
+                <textarea
+                  class="form-control"
+                  rows="3"
+                  placeholder="Tell the donor why you'd like this item..."
+                  required
+                ></textarea>
+              </div>
+              <div class="mb-3">
+                <label class="form-label fw-bold">Contact Information</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  placeholder="Your email address"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label class="form-label fw-bold"
+                  >Preferred Contact Method</label
+                >
+                <select class="form-select">
+                  <option value="email">Email</option>
+                  <option value="phone">Phone</option>
+                  <option value="message">In-app Message</option>
+                </select>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+              class="btn btn-success"
+              onclick="submitRequest()"
+            >
+              <i class="fas fa-paper-plane me-2"></i>Send Request
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/browse.js"></script>
+  </body>
+</html>

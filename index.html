@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ReWear – Community Clothing Exchange Platform</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">
+          <i class="fas fa-recycle me-2"></i>ReWear
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#mission">Mission</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#features">Features</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#how-it-works">How It Works</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="leaderboard.html">Leaderboard</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="login.html">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link btn btn-outline" href="signup.html">Sign Up</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section d-flex align-items-center">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-6 hero-content">
+            <h1 class="hero-title text-white">
+              Turn Old Clothes into New Opportunities
+            </h1>
+            <p class="hero-subtitle text-white">
+              Join ReWear and make sustainability stylish. Connect donors and
+              receivers through a transparent, feedback-driven platform that
+              promotes reuse, sustainability, and social kindness.
+            </p>
+            <div class="hero-buttons">
+              <a href="signup.html" class="btn btn-primary btn-lg me-3 mb-2">
+                <i class="fas fa-gift me-2"></i>Start Donating
+              </a>
+              <a href="browse.html" class="btn btn-outline btn-lg me-3 mb-2">
+                <i class="fas fa-search me-2"></i>Browse Items
+              </a>
+            </div>
+          </div>
+          <div class="col-lg-6 d-none d-lg-block">
+            <div class="text-center">
+              <img
+                src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                alt="Sustainable Fashion"
+                class="img-fluid rounded shadow-lg"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section class="py-5 bg-light" id="mission">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-6">
+            <h2 class="fw-bold mb-4">Our Mission</h2>
+            <p class="lead mb-4">
+              Every day, thousands of wearable clothes are wasted, while many
+              people still lack proper clothing. ReWear aims to connect donors
+              and receivers through a transparent, feedback-driven web platform.
+            </p>
+            <div class="row text-center">
+              <div class="col-4">
+                <div class="stat-card">
+                  <div class="stat-number">1,000+</div>
+                  <small>Items Donated</small>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="stat-card">
+                  <div class="stat-number">500+</div>
+                  <small>Happy Receivers</small>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="stat-card">
+                  <div class="stat-number">50+</div>
+                  <small>Top Donors</small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <img
+              src="https://images.unsplash.com/photo-1617957746028-41bbee1d48f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+              alt="Sustainable Fashion"
+              class="img-fluid rounded shadow"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-5" id="features">
+      <div class="container">
+        <h2 class="text-center fw-bold mb-5">Key Features</h2>
+        <div class="row g-4">
+          <div class="col-md-4">
+            <div class="feature-card">
+              <div class="feature-icon">
+                <i class="fas fa-users"></i>
+              </div>
+              <h5 class="fw-bold">User Roles</h5>
+              <p>
+                Donor, Receiver, and Admin roles for full functionality and
+                community management
+              </p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="feature-card">
+              <div class="feature-icon">
+                <i class="fas fa-gift"></i>
+              </div>
+              <h5 class="fw-bold">Donate & Receive</h5>
+              <p>
+                Upload clothes and request items with just a few clicks. Easy
+                photo upload and item details
+              </p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="feature-card">
+              <div class="feature-icon">
+                <i class="fas fa-star"></i>
+              </div>
+              <h5 class="fw-bold">Feedback Points</h5>
+              <p>
+                Receivers rate donors with up to 50 points per donation. Build
+                trust through honest feedback
+              </p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="feature-card">
+              <div class="feature-icon">
+                <i class="fas fa-trophy"></i>
+              </div>
+              <h5 class="fw-bold">Leaderboard</h5>
+              <p>
+                Top donors ranked by community feedback. Monthly, weekly, and
+                all-time rankings
+              </p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="feature-card">
+              <div class="feature-icon">
+                <i class="fas fa-medal"></i>
+              </div>
+              <h5 class="fw-bold">Badge System</h5>
+              <p>
+                Earn badges for milestones like first donation, high ratings,
+                and community contributions
+              </p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="feature-card">
+              <div class="feature-icon">
+                <i class="fas fa-mobile-alt"></i>
+              </div>
+              <h5 class="fw-bold">Mobile Friendly</h5>
+              <p>
+                Fully responsive design that works perfectly on all devices -
+                desktop, tablet, and mobile
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="py-5 bg-light" id="how-it-works">
+      <div class="container">
+        <h2 class="text-center fw-bold mb-5">How It Works</h2>
+        <div class="row g-4">
+          <div class="col-md-3">
+            <div class="text-center">
+              <div class="feature-icon mx-auto">
+                <i class="fas fa-user-plus"></i>
+              </div>
+              <h5 class="fw-bold mt-3">1. Sign Up</h5>
+              <p>Create your account as a donor or receiver</p>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="text-center">
+              <div class="feature-icon mx-auto">
+                <i class="fas fa-camera"></i>
+              </div>
+              <h5 class="fw-bold mt-3">2. Upload Items</h5>
+              <p>Take photos and add details of clothes you want to donate</p>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="text-center">
+              <div class="feature-icon mx-auto">
+                <i class="fas fa-handshake"></i>
+              </div>
+              <h5 class="fw-bold mt-3">3. Connect</h5>
+              <p>Receivers browse and request items they need</p>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="text-center">
+              <div class="feature-icon mx-auto">
+                <i class="fas fa-star"></i>
+              </div>
+              <h5 class="fw-bold mt-3">4. Rate & Earn</h5>
+              <p>Give feedback and earn points for community trust</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Badges Preview Section -->
+    <section class="py-5">
+      <div class="container">
+        <h2 class="text-center fw-bold mb-5">Earn Badges</h2>
+        <div class="row g-3">
+          <div class="col-md-2 col-6">
+            <div class="badge-card">
+              <div class="badge-icon">🟢</div>
+              <h6 class="fw-bold">Green Hero</h6>
+              <p class="small text-muted">First donation</p>
+            </div>
+          </div>
+          <div class="col-md-2 col-6">
+            <div class="badge-card">
+              <div class="badge-icon">🌿</div>
+              <h6 class="fw-bold">Eco Saver</h6>
+              <p class="small text-muted">5+ donations with high feedback</p>
+            </div>
+          </div>
+          <div class="col-md-2 col-6">
+            <div class="badge-card">
+              <div class="badge-icon">⭐</div>
+              <h6 class="fw-bold">Star Rated</h6>
+              <p class="small text-muted">3 donations with full 50 points</p>
+            </div>
+          </div>
+          <div class="col-md-2 col-6">
+            <div class="badge-card">
+              <div class="badge-icon">🤝</div>
+              <h6 class="fw-bold">Trusted Donor</h6>
+              <p class="small text-muted">10+ donations with avg > 45</p>
+            </div>
+          </div>
+          <div class="col-md-2 col-6">
+            <div class="badge-card">
+              <div class="badge-icon">♻</div>
+              <h6 class="fw-bold">Zero Waster</h6>
+              <p class="small text-muted">10+ successful donations</p>
+            </div>
+          </div>
+          <div class="col-md-2 col-6">
+            <div class="badge-card">
+              <div class="badge-icon">🏆</div>
+              <h6 class="fw-bold">Legend Donor</h6>
+              <p class="small text-muted">Donated 50+ items</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Leaderboard Preview -->
+    <section class="py-5 bg-light">
+      <div class="container">
+        <h2 class="text-center fw-bold mb-5">Top Donors</h2>
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <div class="leaderboard-item">
+              <div class="d-flex align-items-center">
+                <div class="rank me-3">1</div>
+                <div class="avatar me-3">
+                  <img
+                    src="https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80"
+                    alt="Avatar"
+                    class="img-fluid rounded-circle"
+                  />
+                </div>
+                <div class="flex-grow-1">
+                  <h6 class="fw-bold mb-1">Priya S.</h6>
+                  <div class="badges">
+                    <span class="badge bg-success me-1">🌿</span>
+                    <span class="badge bg-success me-1">🟢</span>
+                    <span class="badge bg-success">⭐</span>
+                  </div>
+                </div>
+                <div class="text-end">
+                  <h5 class="fw-bold text-success mb-0">650</h5>
+                  <small class="text-muted">points</small>
+                </div>
+              </div>
+            </div>
+            <div class="leaderboard-item">
+              <div class="d-flex align-items-center">
+                <div class="rank me-3">2</div>
+                <div class="avatar me-3">
+                  <img
+                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80"
+                    alt="Avatar"
+                    class="img-fluid rounded-circle"
+                  />
+                </div>
+                <div class="flex-grow-1">
+                  <h6 class="fw-bold mb-1">Rahul K.</h6>
+                  <div class="badges">
+                    <span class="badge bg-success me-1">🟢</span>
+                    <span class="badge bg-success">⭐</span>
+                  </div>
+                </div>
+                <div class="text-end">
+                  <h5 class="fw-bold text-success mb-0">580</h5>
+                  <small class="text-muted">points</small>
+                </div>
+              </div>
+            </div>
+            <div class="text-center mt-4">
+              <a href="leaderboard.html" class="btn btn-primary btn-lg"
+                >View Full Leaderboard</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-5">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-8 text-center">
+            <h2 class="fw-bold mb-4">Ready to Make a Difference?</h2>
+            <p class="lead mb-4">
+              Join thousands of people making a positive impact on the
+              environment through sustainable fashion.
+            </p>
+            <div class="d-flex justify-content-center gap-3 flex-wrap">
+              <a href="signup.html" class="btn btn-primary btn-lg">
+                <i class="fas fa-user-plus me-2"></i>Join ReWear
+              </a>
+              <a href="browse.html" class="btn btn-secondary btn-lg">
+                <i class="fas fa-search me-2"></i>Browse Items
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4 mb-4">
+            <h5 class="fw-bold mb-3">
+              <i class="fas fa-recycle me-2"></i>ReWear
+            </h5>
+            <p>Building a kinder, greener future — one shirt at a time.</p>
+            <div class="social-links">
+              <a href="#" class="me-3"><i class="fab fa-facebook-f"></i></a>
+              <a href="#" class="me-3"><i class="fab fa-twitter"></i></a>
+              <a href="#" class="me-3"><i class="fab fa-instagram"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-2 col-md-6 mb-4">
+            <h6 class="fw-bold mb-3">Platform</h6>
+            <ul class="list-unstyled">
+              <li><a href="browse.html">Browse Items</a></li>
+              <li><a href="leaderboard.html">Leaderboard</a></li>
+              <li><a href="dashboard.html">Dashboard</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-2 col-md-6 mb-4">
+            <h6 class="fw-bold mb-3">Account</h6>
+            <ul class="list-unstyled">
+              <li><a href="login.html">Login</a></li>
+              <li><a href="signup.html">Sign Up</a></li>
+              <li><a href="dashboard.html">Profile</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-4 mb-4">
+            <h6 class="fw-bold mb-3">Get Started</h6>
+            <p>
+              Join thousands of people making a difference through sustainable
+              fashion.
+            </p>
+            <a href="signup.html" class="btn btn-primary">Join ReWear Today</a>
+          </div>
+        </div>
+        <hr class="my-4" />
+        <div class="text-center">
+          <p class="mb-0">
+            &copy; 2025 ReWear. Built with ♻️ for a better world.
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Firebase CDN -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-storage-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-analytics-compat.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="firebase/firebase-config.js"></script>
+    <script src="js/script.js"></script>
+  </body>
+</html>
